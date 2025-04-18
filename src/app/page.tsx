@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Globe, Code, Database, Zap, ChevronRight, Play, Terminal, Menu } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import Link from 'next/link';
+
 
 export default function RobinHero() {
   const [hovered, setHovered] = useState(false);
@@ -17,13 +19,13 @@ export default function RobinHero() {
         </div>
         <div className="hidden md:flex space-x-8">
           <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Features</a>
-          <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Documentation</a>
-          <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Pricing</a>
-          <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Enterprise</a>
+          <a href="https://github.com/Aman-web-dev/Robin/edit/main/README.md" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Documentation</a>
+          {/* <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Pricing</a> */}
+          {/* <a href="#" className="hover:text-gray-500 dark:hover:text-gray-300 transition">Enterprise</a> */}
         </div>
         <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 text-sm hover:text-gray-500 dark:hover:text-gray-300 transition">Log In</button>
-          <button className="px-4 py-2 text-sm bg-black dark:bg-white text-white dark:text-black rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition">Sign Up Free</button>
+          <Link href='/auth/login' className="px-4 py-2 text-sm hover:text-gray-500 dark:hover:text-gray-300 transition">Log In</Link>
+          <Link href='/auth/signup' className="px-4 py-2 text-sm bg-black dark:bg-white text-white dark:text-black rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition">Sign Up Free</Link>
         </div>
       </nav>
 
