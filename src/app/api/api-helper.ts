@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
+const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Tgi_ismy-jwt-private-key";
 
 type tokenDetails = {
   name: string;
@@ -12,8 +12,7 @@ export const createToken = async (details: tokenDetails) => {
   const token = await jwt.sign(
     details,
     JWT_PRIVATE_KEY,
-    { algorithm: "RS256" },
-    { expiresIn: "1h" }
+    { algorithm: "RS256",expiresIn: "1h" }
   );
   return token;
 };

@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@mikro-orm/cli": "^6.4.13",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

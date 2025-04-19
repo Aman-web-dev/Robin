@@ -7,7 +7,7 @@ export type signupUserType={
 
 export type loginUserType={
     email:string,
-    passowrd:string,
+    password:string,
 }
 
 
