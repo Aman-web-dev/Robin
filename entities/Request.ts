@@ -5,8 +5,9 @@ import {User} from './User';
 @Entity({collection:"request"})
 export class Request {
   @PrimaryKey()
-  _id!: ObjectId;
+  _id: ObjectId = new ObjectId();
 
+  
   @ManyToOne(() => User)
   user!: User;
 

@@ -4,7 +4,7 @@ import { ObjectId } from '@mikro-orm/mongodb';
 @Entity({ collection: "user" })
 export class User {
   @PrimaryKey()
-  _id!: ObjectId;
+  _id: ObjectId = new ObjectId();
 
   @Property({unique: true})
   name!: string;
