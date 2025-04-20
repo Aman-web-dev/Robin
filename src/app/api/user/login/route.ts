@@ -14,7 +14,7 @@ export async function POST(req: NextRequest,res:NextResponse) {
   console.log(em)
   const { email , password } = await req.json() as loginUserType;
   try {
-    const user = await em.findOne(User, { email }) as {name:string,email:string, password:string};
+    const user = await em.findOne(User, { email });
     console.log(user)
     if (!user) {
       return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
