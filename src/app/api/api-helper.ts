@@ -12,7 +12,7 @@ export const createToken = async (details: tokenDetails) => {
   const token = await jwt.sign(
     details,
     JWT_PRIVATE_KEY,
-    { algorithm: "RS256",expiresIn: "1h" }
+    { algorithm: "HS256",expiresIn: "1h" }
   );
   return token;
 };

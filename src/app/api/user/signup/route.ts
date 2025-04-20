@@ -8,6 +8,7 @@ export async function POST(
   req: NextRequest,
   res: NextResponse
 ) {
+  console.log("Got a Signup request")
   const orm = await getORM();
   const em = orm.em.fork();
 
