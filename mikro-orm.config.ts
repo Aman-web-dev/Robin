@@ -22,4 +22,14 @@ export default defineConfig({
   schemaGenerator: {
     disableForeignKeys: true,
   },
+  // Add this to prevent naming issues
+  discovery: {
+    warnWhenNoEntities: true,
+    requireEntitiesArray: true,
+  },
+  // Add this to maintain naming conventions
+  // namingStrategy: {
+  //   entityToCollection: entityName => entityName.toLowerCase() + 's',
+  //   entityToTableName: entityName => entityName.toLowerCase() + 's',
+  // }
 });

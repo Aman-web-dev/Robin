@@ -2,7 +2,7 @@ import { Entity, PrimaryKey, Property, ManyToOne} from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import {User} from './User';
 
-@Entity({collection:"Request"})
+@Entity({collection:"request"})
 export class Request {
   @PrimaryKey()
   _id!: ObjectId;
