@@ -14,12 +14,13 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
+import { redirect } from "next/navigation";
+
 
 export default function RobinHero() {
   const [hovered, setHovered] = useState(false);
-  const {user} = useAuth();
+  const {user,isLoggedIn} = useAuth();
   console.log(user);
-
   return (
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
       {/* Navigation Bar */}

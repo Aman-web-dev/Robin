@@ -17,11 +17,11 @@ type AuthUser = Partial<signupUserType & loginUserType>;
 export function LoginForm({
   className,
   mode,
-  handleSignupAndLogin,
+  handleSignUpOrLogin,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & {
   mode: "login" | "signup";
-  handleSignupAndLogin: (obj: signupUserType | loginUserType) => void;
+  handleSignUpOrLogin: (obj: signupUserType | loginUserType) => void;
 }) {
   const [user, setUser] = useState<AuthUser>({
     name: "",
@@ -75,7 +75,7 @@ export function LoginForm({
         return false;
       }
     }
-    const resp = handleSignupAndLogin(obj);
+    const resp = handleSignUpOrLogin(obj);
     setUser({ name: "",
       email: "",
       password: "",

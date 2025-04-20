@@ -7,31 +7,34 @@ import { signupUserType, loginUserType } from "../../../../type";
 import axios from "axios";
 import { useAuth } from "@/context/auth-context";
 import { redirect } from "next/navigation";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const { login, isLoggedIn ,user } = useAuth();
+
   const para = useParams();
-  const {login,isLoggedIn} = useAuth();  
-
-  if(isLoggedIn) {
-    redirect("/dashboard");
-  }
-
-
   console.log(para);
-  const router = useRouter();
 
-  const handleSignupAndLogin = async (obj: signupUserType | loginUserType) => {
+  const handleSignupOrLogin = async (obj: signupUserType | loginUserType) => {
     const endpoint =
       para.slug === "signup" ? "/api/user/signup" : "/api/user/login";
     try {
       const response = await axios.post(endpoint, obj);
-      login(response.data.user,response.data.token);
+      if (para.slug === "login") {
+        console.log("Post Login User Details",response.data.user)
+        login(response.data.user, response.data.token);
+      }
       console.log(response.data);
-      router.push("/dashboard");
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (para.slug === "login" && user) {
+      redirect("/dashboard");
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
@@ -43,7 +46,7 @@ export default function LoginPage() {
           Robin.
         </a>
         <LoginForm
-          handleSignupAndLogin={handleSignupAndLogin}
+          handleSignUpOrLogin={handleSignupOrLogin}
           mode={
             typeof para.slug === "string" &&
             (para.slug === "login" || para.slug === "signup")

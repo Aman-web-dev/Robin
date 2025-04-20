@@ -16,16 +16,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useAuth } from "@/context/auth-context";
-import { redirect } from "next/navigation";
 import { ModeToggle } from "@/components/theme-toggle-btn";
-
 export default function Page({ children }: { children: ReactNode }) {
-  const { user, isLoggedIn } = useAuth();
-
-  if (isLoggedIn === false) {
-    redirect("/auth/login");
-  }
 
   return (
     <SidebarProvider>
@@ -38,12 +30,7 @@ export default function Page({ children }: { children: ReactNode }) {
               <Separator orientation="vertical" className="mr-2 h-4" />
               <Breadcrumb>
                 <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">
-                      Building Your Application
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
+                  {/* <BreadcrumbSeparator className="hidden md:block" /> */}
                   <BreadcrumbItem>
                     <BreadcrumbPage>Data Fetching</BreadcrumbPage>
                   </BreadcrumbItem>
