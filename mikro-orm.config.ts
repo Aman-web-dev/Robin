@@ -13,7 +13,7 @@ export default defineConfig({
   dbName: process.env.MONGODB_DB_NAME || "robin",
   entities: [User, Request],
   entitiesTs: [User, Request],
-  forceEntityConstructor: true,
+  forceEntityConstructor: false,
   debug: process.env.NODE_ENV !== "production" || process.env.DEBUG === "true",
   pool: {
     min: process.env.NODE_ENV === "production" ? 5 : 1,
