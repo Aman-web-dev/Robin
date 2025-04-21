@@ -17,11 +17,13 @@ type AuthUser = Partial<signupUserType & loginUserType>;
 export function LoginForm({
   className,
   mode,
+  loading,
   handleSignUpOrLogin,
   ...props
 }: React.ComponentPropsWithoutRef<"div"> & {
   mode: "login" | "signup";
   handleSignUpOrLogin: (obj: signupUserType | loginUserType) => void;
+  loading: boolean;
 }) {
   const [user, setUser] = useState<AuthUser>({
     name: "",
@@ -100,6 +102,7 @@ export function LoginForm({
                   <div className="grid gap-2">
                     <Label htmlFor="email">Name</Label>
                     <Input
+                    disabled={loading}
                       name="name"
                       id="name"
                       value={user.name || ""}
@@ -126,6 +129,7 @@ export function LoginForm({
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
+                  disabled={loading}
                     name="email"
                     value={user.email}
                     onChange={handleChange}
@@ -150,6 +154,7 @@ export function LoginForm({
                   <Input
                   onChange={handleChange}
                     name="password"
+                    disabled={loading }
                     value={user.password}
                     required
                     id="password"
@@ -161,25 +166,49 @@ export function LoginForm({
                     <div className="flex items-center">
                       <Label htmlFor="password">Confirm Password</Label>
                     </div>
-                    <Input onChange={handleChange} value={user.confirmPassword || ""} name="confirmPassword" id="confirm_password" type="password" required />
+                    <Input disabled={loading} onChange={handleChange} value={user.confirmPassword || ""} name="confirmPassword" id="confirm_password" type="password" required />
                   </div>
                 )}
 
                 <Button
                   onClick={(e) => {
-                    if (
-                      user.email &&
-                      user.password &&
-                      (mode === "login" || (user.name && user.confirmPassword))
-                    ) {
-                      checkValidationAndSignup(e, user as signupUserType | loginUserType);
-                    } else {
-                      alert("Please fill in all required fields.");
-                    }
+                  if (
+                    user.email &&
+                    user.password &&
+                    (mode === "login" || (user.name && user.confirmPassword))
+                  ) {
+                    checkValidationAndSignup(e, user as signupUserType | loginUserType);
+                  } else {
+                    alert("Please fill in all required fields.");
+                  }
                   }}
                   className="w-full"
+                  disabled={loading}
                 >
-                  {mode == "login" ? "Login" : "Signup"}
+                  {loading ? (
+                  <svg
+                    className="animate-spin h-5 w-5 text-white mx-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    ></circle>
+                    <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  ) : (
+                  mode == "login" ? "Login" : "Signup"
+                  )}
                 </Button>
               </div>
               <div className="text-center text-sm">

@@ -4,7 +4,7 @@ import { Request } from "../../../../entities/Request";
 import { User } from "../../../../entities/User";
 import { getORM } from "@/lib/mikro-orm";
 
-
+import { ObjectId } from "mongodb";
 
 
 export async function POST(req: NextRequest) {
@@ -24,14 +24,15 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify user exists
-    const user = await em.findOne(User, { _id: user_id });
+    const user = await em.findOne(User, { _id : new ObjectId(user_id) });
+    console.log("userCame out", user);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     // Create new Request entity
     const newRequest = em.create(Request, {
-      user: user,
+      User: user,
       request_url,
       method,
       headers,
@@ -91,9 +92,9 @@ export async function GET(req: NextRequest) {
     // Fetch requests with pagination, optionally filtered by user_id
     const [requests, total] = await em.findAndCount(
       Request,
-      user_id ? { user: user_id }  : {}, // Corrected field name to user_id
+      user_id ? { User: user_id }  : {}, // Corrected field name to user_id
       {
-        populate: ["user"], // Populate user_id for full user details
+        populate: ["User"], // Populate user_id for full user details
         limit,
         offset: skip,
         orderBy: { createdAt: "desc" }, // Sort by createdAt descending (latest first)

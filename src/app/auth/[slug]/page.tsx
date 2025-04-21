@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { use, useEffect,useState} from "react";
 import { GalleryVerticalEnd } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { LoginForm } from "@/components/login-form";
@@ -11,11 +11,13 @@ import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
   const { login, isLoggedIn ,user } = useAuth();
+  const [loading,setLoading]=useState(false);  
 
   const para = useParams();
   console.log(para);
 
   const handleSignupOrLogin = async (obj: signupUserType | loginUserType) => {
+    setLoading(true);
     const endpoint =
       para.slug === "signup" ? "/api/user/signup" : "/api/user/login";
     try {
@@ -23,10 +25,12 @@ export default function LoginPage() {
       if (para.slug === "login") {
         console.log("Post Login User Details",response.data.user)
         login(response.data.user, response.data.token);
+        setLoading(false);
       }
       console.log(response.data);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -47,6 +51,7 @@ export default function LoginPage() {
         </a>
         <LoginForm
           handleSignUpOrLogin={handleSignupOrLogin}
+          loading={loading}
           mode={
             typeof para.slug === "string" &&
             (para.slug === "login" || para.slug === "signup")

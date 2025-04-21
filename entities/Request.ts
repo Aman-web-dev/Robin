@@ -1,40 +1,39 @@
-import { Entity, PrimaryKey, Property, ManyToOne} from '@mikro-orm/core';
-import { ObjectId } from '@mikro-orm/mongodb';
-import {User} from './User';
+import { Entity, PrimaryKey, Property, ManyToOne } from "@mikro-orm/core";
+import { ObjectId } from "@mikro-orm/mongodb";
+import { User } from "./User";
 
-@Entity({collection:"request"})
+@Entity({ collection: "Request" })
 export class Request {
   @PrimaryKey()
   _id: ObjectId = new ObjectId();
 
-  
   @ManyToOne(() => User)
-  user!: User;
+  User!: User;
 
   @Property()
   request_url!: string;
 
   @Property()
-  method!: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD';
+  method!: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS" | "HEAD";
 
-  @Property({ type: 'json' })
+  @Property({ type: "json" })
   headers!: Record<string, string>;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   body?: any;
 
   @Property({ nullable: true })
   body_raw?: string;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   query_params?: Record<string, string>;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   path_params?: Record<string, string>;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   authentication?: {
-    type: 'Bearer' | 'Basic' | 'APIKey' | 'None';
+    type: "Bearer" | "Basic" | "APIKey" | "None";
     token?: string;
   };
 
@@ -47,7 +46,7 @@ export class Request {
   @Property({ nullable: true })
   accept?: string;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   response?: {
     status: number;
     status_text: string;
@@ -70,7 +69,7 @@ export class Request {
   retries?: number;
 
   @Property({ nullable: true })
-  environment?: 'development' | 'staging' | 'production';
+  environment?: "development" | "staging" | "production";
 
   @Property({ nullable: true })
   client_ip?: string;
@@ -78,7 +77,7 @@ export class Request {
   @Property({ nullable: true })
   user_agent?: string;
 
-  @Property({ type: 'json', nullable: true })
+  @Property({ type: "json", nullable: true })
   error?: {
     message: string;
     code?: string;

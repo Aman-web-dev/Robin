@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, { params }: { params: { request_id: 
     const em = orm.em.fork();
 
     const request_id = params.request_id;
-    const request = await em.findOne(Request, { request_id }, { populate: ["user"] });
+    const request = await em.findOne(Request, { request_id }, { populate: ["User"] });
 
     if (!request) {
       return NextResponse.json({ error: "Request not found" }, { status: 404 });

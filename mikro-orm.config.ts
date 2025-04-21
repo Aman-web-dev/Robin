@@ -13,20 +13,20 @@ export default defineConfig({
   dbName: process.env.MONGODB_DB_NAME || "robin",
   entities: [User, Request],
   entitiesTs: [User, Request],
-  forceEntityConstructor: false,
+  // forceEntityConstructor: false,
   debug: process.env.NODE_ENV !== "production" || process.env.DEBUG === "true",
   pool: {
     min: process.env.NODE_ENV === "production" ? 5 : 1,
     max: process.env.NODE_ENV === "production" ? 20 : 10,
   },
-  schemaGenerator: {
-    disableForeignKeys: true,
-  },
+  // schemaGenerator: {
+  //   disableForeignKeys: false,
+  // },
   // Add this to prevent naming issues
-  discovery: {
-    warnWhenNoEntities: true,
-    requireEntitiesArray: true,
-  },
+  // discovery: {
+  //   warnWhenNoEntities: true,
+  //   requireEntitiesArray: true,
+  // },
   // Add this to maintain naming conventions
   // namingStrategy: {
   //   entityToCollection: entityName => entityName.toLowerCase() + 's',
