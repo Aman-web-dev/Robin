@@ -15,7 +15,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
 import { redirect } from "next/navigation";
-
+import Linkify from "next/link";
 
 export default function RobinHero() {
   const [hovered, setHovered] = useState(false);
@@ -78,28 +78,29 @@ export default function RobinHero() {
           </p>
 
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <button
+            <Link href="/auth/signup"
+
               className={`px-6 py-3 bg-black dark:bg-white text-white dark:text-black font-medium rounded-md flex items-center justify-center transition ${
                 hovered ? "bg-gray-800 dark:bg-gray-200" : ""
-              }`}
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
+              }`} 
+              // {/* onMouseEnter={() => setHovered(true)}
+              // onMouseLeave={() => setHovered(false)} */}
             >
               Get Started
               <ChevronRight size={20} className="ml-2" />
-            </button>
-
+            </Link>
+{/* 
             <button className="px-6 py-3 border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white font-medium rounded-md flex items-center justify-center transition">
               Try Demo
               <Play size={18} className="ml-2" />
-            </button>
+            </button> */}
           </div>
 
-          <div className="pt-6">
+          {/* <div className="pt-6">
             <p className="text-gray-500 dark:text-gray-400 mb-4">
               Trusted by developers at:
-            </p>
-            <div className="flex flex-wrap gap-8">
+            </p> */}
+            {/* <div className="flex flex-wrap gap-8">
               <div className="text-xl font-bold text-gray-700 dark:text-gray-300">
                 Microsoft
               </div>
@@ -112,8 +113,8 @@ export default function RobinHero() {
               <div className="text-xl font-bold text-gray-700 dark:text-gray-300">
                 Twitter
               </div>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
 
         {/* Right Column - Code/UI Interface Mockup */}
